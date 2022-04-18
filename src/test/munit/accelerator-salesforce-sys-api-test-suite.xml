@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="accelerator-salesforce-sys-api-test-suite.xml" />
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest" doc:id="6e25f1fb-6dd5-4af2-8c47-647541962237" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="4743b3c5-06be-48a2-b4b3-4b7483a3a9e8" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to accelerator-salesforce-sys-api-main" doc:id="29b58d12-4469-479e-97aa-e394e60d5d1f" name="accelerator-salesforce-sys-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="a42de1ae-a575-455e-a7f0-26109bc84c27" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest1" doc:id="e082315b-a84f-4af0-b43b-6332c670e3f9" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="312fa536-970e-4277-824e-7bb728109e29" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="c0c40b57-3e96-49c1-a2ae-fea2ee2d8edb" >
+				<flow-ref doc:name="Flow-ref to accelerator-salesforce-sys-api-main" doc:id="5e9e3da8-706c-4032-a947-95c4189ad179" name="accelerator-salesforce-sys-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="24613b8d-fa1c-4bbe-9696-38f595917ced" >
+						<logger level="INFO" doc:name="Logger" doc:id="081b0425-91c4-4e73-b3db-82b506027eb6" message='#["continued"]'/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="af25c068-bfc1-4ade-bebc-561e1705b0ae" actual="#[payload]" expected='#[{message: "Bad request"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest2" doc:id="8af38756-1454-4d4f-9bf4-e854306ab945" description="Test">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Copy_of_Mock when" doc:id="31b6d2d5-50bd-402e-9f78-05766263c20a" processor="apikit:router">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<try doc:name="Copy_of_Try" doc:id="bb496d77-0f11-463b-9c78-a53c847548e9">
+				<flow-ref doc:name="Copy_of_Flow-ref to accelerator-salesforce-sys-api-main" doc:id="f7232cd8-4da8-4604-b72c-a84c957e3669" name="accelerator-salesforce-sys-api-main" />
+				
+					<error-handler>
+						<on-error-continue enableNotifications="true" logException="true" doc:name="Copy_of_On Error Continue" doc:id="1e61627d-95fe-48aa-a2d6-284c3b2a6503">
+							<logger level="INFO" doc:name="Copy_of_Logger" doc:id="716ebed7-3957-4ac6-89ce-6f430cf06de1" message='#["continued"]' />
+						</on-error-continue>
+					</error-handler>
+				</try>
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Copy_of_Assert equals" doc:id="676af42f-e612-4610-ad6f-a8592221e9d9" actual="#[payload]" expected='#[{message: "Resource not found"}]' />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="Copy_of_accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest3" doc:id="03acb556-a5fb-4d42-9482-2ddf78bcc2cc" description="Test">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Copy_of_Mock when" doc:id="24d228a0-aaf1-4c96-8939-09d31901da33" processor="apikit:router">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<try doc:name="Copy_of_Try" doc:id="5fd0de92-9fb4-4eb2-ba39-5b9db717b340">
+									<flow-ref doc:name="Copy_of_Flow-ref to accelerator-salesforce-sys-api-main" doc:id="6bffb84d-1135-40ca-a4db-1501dad573df" name="accelerator-salesforce-sys-api-main" />
+				
+					<error-handler>
+						<on-error-continue enableNotifications="true" logException="true" doc:name="Copy_of_On Error Continue" doc:id="e357922d-fa70-4675-b291-bddceb348524">
+							<logger level="INFO" doc:name="Copy_of_Logger" doc:id="a51aa250-fd1c-4f4f-8440-4d6a29eb812d" message='#["continued"]' />
+						</on-error-continue>
+					</error-handler>
+				</try>
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Copy_of_Assert equals" doc:id="8db748c4-614a-43c7-817b-478ce0698d63" actual="#[payload]" expected='#[{message: "Method not allowed"}]' />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="Copy_of_accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest4" doc:id="97b84ba2-3ed7-445a-80ba-08e9dae59b99" description="Test">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Copy_of_Mock when" doc:id="ab759040-a6fc-4e6f-8dd4-6c53d5869114" processor="apikit:router">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<try doc:name="Copy_of_Try" doc:id="ade39415-452b-4b51-9e74-de4422715589">
+									<flow-ref doc:name="Copy_of_Flow-ref to accelerator-salesforce-sys-api-main" doc:id="fc6394a6-65ba-427f-b867-dd749669529b" name="accelerator-salesforce-sys-api-main" />
+				
+					<error-handler>
+						<on-error-continue enableNotifications="true" logException="true" doc:name="Copy_of_On Error Continue" doc:id="8ada7e94-05b4-4cee-9697-2d9c36945e07">
+							<logger level="INFO" doc:name="Copy_of_Logger" doc:id="93ecc357-77cd-41e3-8b1c-7dc0280fc1fc" message='#["continued"]' />
+						</on-error-continue>
+					</error-handler>
+				</try>
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Copy_of_Assert equals" doc:id="4160a035-be13-4f6a-96ef-8aa6f46df7ce" actual="#[payload]" expected='#[{message: "Not acceptable"}]' />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest6" doc:id="2f317926-8570-425e-a2f9-01c0180c2cf3" description="Test">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when" doc:id="3efc54e5-8b0d-428b-ae38-cc16776c7478" processor="apikit:router">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<try doc:name="Try" doc:id="5b7b88b9-f179-435b-87e4-d4ea00446bae">
+				<flow-ref doc:name="Flow-ref to accelerator-salesforce-sys-api-main" doc:id="ad9f0ef8-6cf0-4377-a5e0-b30cecbdd354" name="accelerator-salesforce-sys-api-main" />
+				
+					<error-handler>
+						<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="5b17dc42-73ad-4f1a-8887-74c7407f6b09">
+							<logger level="INFO" doc:name="Logger" doc:id="58622eca-9cde-49e5-8263-24f4ed7d27f4" message='#["continued"]' />
+						</on-error-continue>
+					</error-handler>
+				</try>
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Assert equals" doc:id="86d43943-f709-42da-b4b0-32844de40ced" actual="#[payload]" expected='#[{message: "Not Implemented"}]' />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="Copy_of_accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-mainTest7" doc:id="d5a26e08-e18e-4cdc-ab5d-7964182f7b88" description="Test">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Copy_of_Mock when" doc:id="58af036a-c414-48ec-87b4-8f06cad3f3b3" processor="apikit:router">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<try doc:name="Copy_of_Try" doc:id="b843b8d6-154b-46b7-a8b8-47ec0607d823">
+				<flow-ref doc:name="Copy_of_Flow-ref to accelerator-salesforce-sys-api-main" doc:id="99fa795c-156a-489d-9fd4-a1f96a61e5cc" name="accelerator-salesforce-sys-api-main" />
+				
+					<error-handler>
+						<on-error-continue enableNotifications="true" logException="true" doc:name="Copy_of_On Error Continue" doc:id="35db4853-72ef-4d7d-b903-943718fc7ced">
+							<logger level="INFO" doc:name="Copy_of_Logger" doc:id="e8a61a98-49db-4ccc-a526-92b481089bf4" message='#["continued"]' />
+						</on-error-continue>
+					</error-handler>
+				</try>
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-equals doc:name="Copy_of_Assert equals" doc:id="8ee8b683-2d80-4ee5-bc14-44758bc0f4c8" actual="#[payload]" expected='#[{message: "Unsupported media type"}]' />
+			</munit:validation>
+		</munit:test>
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-consoleTest" doc:id="fb3a7581-0544-4f13-80d0-b2e72bf3d541" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="c1150946-c1c2-4e32-896a-e79674aed3e9" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to accelerator-salesforce-sys-api-console" doc:id="ca484caa-fb18-4fae-954e-cb3e322e44f8" name="accelerator-salesforce-sys-api-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="efe83190-472f-46ea-8e68-eca24365e18a" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-salesforce-sys-api-test-suite-accelerator-salesforce-sys-api-consoleTest1" doc:id="38e37533-6bea-4017-b371-cc0ccce5ad04" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="80578027-b6ff-440c-86d6-2bcc5081e2f3" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-salesforce-sys-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="f7677139-17fe-452f-9028-bb9b6209ae1e" >
+				<flow-ref doc:name="Flow-ref to accelerator-salesforce-sys-api-console" doc:id="e5bda4ea-b871-4f61-8ce6-9eb246eba18e" name="accelerator-salesforce-sys-api-console" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="f5f08b90-c225-41a9-b096-c2ef8684a2d2" >
+						<logger level="INFO" doc:name="Logger" doc:id="a91d4e01-018f-4913-9a65-e734dd66f0e0" message='#["continued"]'/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="493f2f56-6d4e-4e3e-94de-21ceabbd3484" actual="#[payload]" expected='#[{message: "Resource not found"}]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

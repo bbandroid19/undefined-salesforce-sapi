@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "ac322d12-24f9-497a-aedb-30470b1af97c",
+		"name": "accelerator-salesforce-sys-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Release 1.3",
+			"item": [
+				{
+					"name": "sfdc-get-case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "204e0a11-f474-41a4-a0fc-4557e49c7b13",
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "64d6d246419f4eebac03e1f5130efa62",
+								"type": "text"
+							},
+							{
+								"key": "client_secret",
+								"value": "82B1292cE0614306B826E29598723CD7",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/case/5006g00000HyvNXAAZ",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"case",
+								"5006g00000HyvNXAAZ"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-get-case retry exhaust",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4b7d4ddd-071f-494b-b3bc-f7e8e4edff9e",
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "64d6d246419f4eebac03e1f5130efa62"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "82B1292cE0614306B826E29598723CD7"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/case/5006g00000HyvNXAAZ",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"case",
+								"5006g00000HyvNXAAZ"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Shutdown the API application before executing test, else this test will fail in the runner"
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-get-bad-request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a68fc905-30ad-4f16-9995-0bcb10759c8e",
+								"exec": [
+									"pm.test(\"Invalid Request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "64d6d246419f4eebac03e1f5130efa62"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "82B1292cE0614306B826E29598723CD7",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/case/5003k0",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"case",
+								"5003k0"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Invalid Header Case"
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-update-case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c78d708-3a4d-4a00-bb4d-45ada21fcb09",
+								"exec": [
+									"pm.test(\"Successful PATCH request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"caseId\": \"5006g00000D65gdAAB\",\n\t\"comments\": \"This new a update\",\n\t\"externalComments\": \"new update\",\n\t\"externalStatus\": \"In Progress\",\n\t\"externalOwner\": \"Albert\",\n\t\"externalPriority\": \"Medium\",\n\t\"priority\": \"Medium\",\n\t\"state\":\"In Progress\",\n\t\"externalSystemLastUpdated\": \"10/22/2019\",\n\t\"lastModifiedDate\" : \"2019-10-29T01:39:37.026Z\"\n}"
+						},
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/case/5006g00000D65gdAAB",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"case",
+								"5006g00000D65gdAAB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-update-case-failure",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5a0a905-37cd-4454-b285-e1e5cc68c9ed",
+								"exec": [
+									"pm.test(\"Failure PATCH request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"caseId\": \"\",\n\t\"comments\": \"This new a update\",\n\t\"externalComments\": \"new update\",\n\t\"externalStatus\": \"In Progress\",\n\t\"externalOwner\": \"Albert\",\n\t\"externalPriority\": \"Medium\",\n\t\"priority\": \"Medium\",\n\t\"state\":\"In Progress\",\n\t\"externalSystemLastUpdated\": \"10/22/2019\",\n\t\"lastModifiedDate\" : \"2019-10-29T01:39:37.026Z\"\n}"
+						},
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/case/5003k00000zSuNaAAK",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"case",
+								"5003k00000zSuNaAAK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-contact-upsert",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3b1b1de-3892-498f-a8aa-76f26c1954f1",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "4dbedfc78c91413d8e3b7b91d9d3a951",
+								"type": "text"
+							},
+							{
+								"key": "client_secret",
+								"value": "D9c4551b46024D4583DBAadcAFaf3b09",
+								"type": "text"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Teshawn\",\n  \"lastName\": \"Raisley\",\n  \"email\": \"traisley@salesforce.com\",\n  \"address1\": \"415 S BERNARDO AVE\",\n  \"address2\": \"APT 303\",\n  \"city\": \"SUNNYVALE\",\n  \"state\": \"CA\",\n  \"country\": \"US\",\n  \"postalCode\": \"94086\",\n  \"contactPhone\": \"2220004343\",\n  \"customerID\": \"abYmCi4rk0R5pzVVcerV4uTSBQ\",\n  \"customerNumber\": \"00002496\",\n  \"customerListID\": \"ASFUS\",\n  \"siteID\": \"ASFUS\",\n  \"contactID\": \"abYmCi4rk0R5pzVVcerV4uTSBQ\"\n}"
+						},
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/contact",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sfdc-contact-upsert-failure",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6ecf5635-b87f-461b-97be-3a95a9d1141f",
+								"exec": [
+									"pm.test(\"Failure POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "4dbedfc78c91413d8e3b7b91d9d3a951"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "D9c4551b46024D4583DBAadcAFaf3b09"
+							},
+							{
+								"key": "content-type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Teshawn\",\n  \"lastName\": \"Raisley\",\n  \"email\": \"traisley@flcx.com\",\n  \"address1\": \"415 S BERNARDO AVE\",\n  \"address2\": \"APT 303\",\n  \"city\": \"SUNNYVALE\",\n  \"state\": \"CA\",\n  \"country\": \"US\",\n  \"postalCode\": \"94086\",\n  \"contactPhone\": \"2220004343\",\n  \"customerID\": \"dss\",\n  \"customerListID\": \"ASFUS\",\n  \"siteID\": \"ASFUS\",\n  \"contactID\": \"abYmCi4rk0R5pzVVcerV4uTSBQ\"\n}"
+						},
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/contact",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Release 1.4",
+			"item": [
+				{
+					"name": "Query Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6053f8af-b3b8-4b1b-b8fc-66c87ba9f6f8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/ping",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						},
+						"description": "Call ping operation with no parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "Query Health with Dependencies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c812fbd-0a91-47de-b0d5-08b5879f01b5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/ping?checkDependencies=true",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							],
+							"query": [
+								{
+									"key": "checkDependencies",
+									"value": "true",
+									"description": "Include health of dependencies"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Health with Invalid Parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "406550f8-b6db-4910-b1a1-0d8e92a7f71a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_salesforce_sys_api}}/api/ping?checkDependencies=true-ish",
+							"protocol": "https",
+							"host": [
+								"{{host_salesforce_sys_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							],
+							"query": [
+								{
+									"key": "checkDependencies",
+									"value": "true-ish",
+									"description": "Should not return dependencies"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{accelerator_app_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{accelerator_app_client_id}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "fd62f4ce-2776-4fa1-84a7-ae96bd970451",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "628d6bc3-607f-43cb-bc82-29cb906eca4e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "49138d7a-5afe-40a8-86f7-6cccd420f09b",
+			"key": "host_salesforce_sys_api",
+			"value": "accel-salesforce-sys-api-v1-dev.ca-c1.cloudhub.io"
+		},
+		{
+			"id": "a20f4382-ffdc-4ab1-b4a0-d1938b0ddf24",
+			"key": "accelerator_app_client_id",
+			"value": "e6b34da7c9124b8d93963bdf76223e5b"
+		},
+		{
+			"id": "a8f235af-cad7-479e-b92a-8b42769fae29",
+			"key": "accelerator_app_client_secret",
+			"value": "c0613717a86c42BD808cD2FaEE5362D8"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

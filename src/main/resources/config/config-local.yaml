@@ -1,0 +1,48 @@
+# API specification
+api:
+  name: "${api.name}"
+  version: "${project.version}"
+  #Replace with respective autodiscovery id
+  autodiscoveryID: "16422521"
+  
+# Listener configuration    
+https:
+  host: "0.0.0.0"
+  port: "8083"
+  
+# API Configuration
+sfdc-sys-api:
+  http-listener:
+    path: "/api/*"
+
+# Salesforce Configurations
+sfdc:
+  #token: "over ridden during deploy time"
+  #password: "overridden during deploy time"
+  # Replace Salesforce Username
+  userName: "njclabs@sfdcservicecloud.com"
+  caseQuery: "SELECT AccountId,AssetId,CaseNumber,ClosedDate,Comments,ContactEmail,ContactFax,ContactId,ContactMobile,ContactPhone,CreatedById,CreatedDate,Description,Id,IsClosed,IsDeleted,IsEscalated,LastModifiedById,LastModifiedDate,LastReferencedDate,LastViewedDate,MasterRecordId,Origin,OwnerId,ParentId,Priority,Reason,SourceId,Status,Subject,SuppliedCompany,SuppliedEmail,SuppliedName,SuppliedPhone,SystemModstamp,Sync_With_JIRA__c,Sync_With_SNOW__c,Type\
+    \ FROM Case WHERE Id = :caseId"
+  external-customer-no-field: "External_Customer_ID__c"
+  
+# Retry configuration
+retry:
+   sfdc: 
+    delayMillisecs: "3000"
+    numRetries: "3"
+    
+# Reconnect configuration
+reconnection:
+     sfdc:
+      frequency: "2000"
+      attempts: "2"
+
+# Customize the application messages in the below section
+application-msgs:
+  # Before Connector logger message
+  before-connector-call-message: "Before Connector Call"
+  # After Connector logger message
+  after-connector-call-message: "After Connector Call"
+  # Local Exception logger message
+  local-exception-handler-message: "Exception has occured"
+  success-flag: "true"

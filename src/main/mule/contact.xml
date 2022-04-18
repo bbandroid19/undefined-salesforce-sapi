@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="contact_upsert-contact" doc:id="cae3946e-7bae-4b9c-b6c6-9a9bfbf544da" >
+		<ee:transform doc:name="Set Upsert Request" doc:id="35f5966d-a258-4721-86dc-4589cf8bb554" >
+			<ee:message >
+				<ee:set-payload resource="transforms/dwl/sfdc-upsert-contact.dwl" />
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Before SF Update" doc:id="58117376-46af-4d3d-8638-954735bf7af3" message="${application-msgs.before-connector-call-message}"/>
+		<until-successful maxRetries="${retry.sfdc.numRetries}" doc:name="Until Successful-upsert-contact" doc:id="0c8e520c-7b92-4e30-90d1-3ff040ee0bff" millisBetweenRetries="${retry.sfdc.delayMillisecs}">
+			<salesforce:upsert doc:name="Upsert Contact" doc:id="30332847-dff3-4674-b3e1-ef9cb2b2656e" config-ref="Salesforce_Config" objectType="Contact" externalIdFieldName="${sfdc.external-customer-no-field}" />
+		</until-successful>
+		<logger level="INFO" doc:name="After SF Update" doc:id="4c9b14a0-24fd-4276-8214-6c99c918e0c3" message="${application-msgs.after-connector-call-message}" />
+		<ee:transform doc:name="Set Response" doc:id="78c2fb79-81bb-4605-839d-0016c51a96cc" >
+			<ee:message >
+				<ee:set-payload resource="transforms/dwl/sfdc-upsert-response.dwl" />
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>
